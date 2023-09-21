@@ -96,25 +96,17 @@ class Agent():
     def decrement_epsilon(self):
         self.epsilon = self.epsilon * self.eps_dec if self.epsilon > self.eps_min else self.eps_min
 
-    def save_models(self, chkpt_dir_attacker, chkpt_dir_honest):
-        self.q_eval_attacker.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_attacker',
-                                             chkpt_dir=chkpt_dir_attacker)
-        self.q_eval_honest.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_honest',
-                                           chkpt_dir=chkpt_dir_honest)
-        self.q_next_attacker.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_attacker',
-                                             chkpt_dir=chkpt_dir_attacker)
-        self.q_next_honest.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_honest',
-                                           chkpt_dir=chkpt_dir_honest)
+    def save_models(self):
+        self.q_eval_attacker.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_attacker')
+        self.q_eval_honest.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_honest')
+        self.q_next_attacker.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_attacker')
+        self.q_next_honest.save_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_honest')
 
-    def load_models(self, chkpt_dir_attacker, chkpt_dir_honest):
-        self.q_eval_attacker.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_attacker',
-                                             chkpt_dir=chkpt_dir_attacker)
-        self.q_eval_honest.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_honest',
-                                           chkpt_dir=chkpt_dir_honest)
-        self.q_next_attacker.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_attacker',
-                                             chkpt_dir=chkpt_dir_attacker)
-        self.q_next_honest.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_honest',
-                                           chkpt_dir=chkpt_dir_honest)
+    def load_models(self):
+        self.q_eval_attacker.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_attacker')
+        self.q_eval_honest.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_eval_honest')
+        self.q_next_attacker.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_attacker')
+        self.q_next_honest.load_checkpoint(name=self.env_name + '_' + self.algo + '_q_next_honest')
 
     def learn(self, counter):
         if counter < self.batch_size:

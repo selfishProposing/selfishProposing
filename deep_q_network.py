@@ -25,16 +25,14 @@ class DeepQNetwork(nn.Module):
         actions = self.fc3(layer2)
         return actions
 
-    def save_checkpoint(self, name, chkpt_dir):
+    def save_checkpoint(self, name):
         print('... saving checkpoint ...')
-        checkpoint_dir = chkpt_dir
-        checkpoint_file = os.path.join(checkpoint_dir, name)
+        checkpoint_file = os.path.join(name)
         T.save(self.state_dict(), checkpoint_file)
 
-    def load_checkpoint(self, name, chkpt_dir):
+    def load_checkpoint(self, name):
         print('... loading checkpoint ...')
-        checkpoint_dir = chkpt_dir
-        checkpoint_file = os.path.join(checkpoint_dir, name)
+        checkpoint_file = os.path.join(name)
         self.load_state_dict(T.load(checkpoint_file))
 
 

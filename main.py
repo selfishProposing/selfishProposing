@@ -65,10 +65,7 @@ if __name__ == '__main__':
 
 
     if testing:
-        checkpoint_file_attacker = os.path.join('attacker_best_result', str(0))
-        checkpoint_file_honest = os.path.join('honest_best_result', str(0))
-        agent.load_models(chkpt_dir_attacker=checkpoint_file_attacker, chkpt_dir_honest=checkpoint_file_honest)
-
+        agent.load_models()
 
     scores_attacker, scores_honest, scores_average = [], [], []
     max_average_index = []
@@ -90,18 +87,5 @@ if __name__ == '__main__':
             avg_reward = np.sum(scores_attacker[-index1:])/np.sum(np.add(scores_attacker[-index1:], scores_honest[-index1:]))
             scores_average.append(avg_reward)
             print('counter:', counter, 'avg_reward:', avg_reward)
-            if avg_reward >= min(max_average_index, default=float('-inf')) and len(max_average_index) < n_checkpoint and (not testing):
-                max_average_index.append(avg_reward)
-                checkpoint_file_attacker = os.path.join('attacker_best_result', str(len(max_average_index)-1))
-                checkpoint_file_honest = os.path.join('honest_best_result', str(len(max_average_index)-1))
-                agent.save_models(chkpt_dir_attacker=checkpoint_file_attacker,
-                                  chkpt_dir_honest=checkpoint_file_honest)
-            elif avg_reward >= min(max_average_index, default=float('-inf')) and len(max_average_index) == n_checkpoint and (not testing):
-                max_average_index[max_average_index.index(min(max_average_index))] = avg_reward
-                # checkpoint_file_attacker = os.path.join('attacker_best_result', str(max_average_index.index(avg_reward)))
-                # checkpoint_file_honest = os.path.join('honest_best_result', str(max_average_index.index(avg_reward)))
-                checkpoint_file_attacker = os.path.join('attacker_best_result',
-                                                        str(max_average_index.index(avg_reward)))
-                checkpoint_file_honest = os.path.join('honest_best_result', str(max_average_index.index(avg_reward)))
-                agent.save_models(chkpt_dir_attacker=checkpoint_file_attacker,
-                                  chkpt_dir_honest=checkpoint_file_honest)
+            if max(scores_average) == avg_reward and (not testing):
+                agent.save_models()
