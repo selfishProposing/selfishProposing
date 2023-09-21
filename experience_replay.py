@@ -1,3 +1,5 @@
+# Code adapted from rainbow-is-all-you-need (PrioritizedExperienceReplay)
+# https://github.com/Curt-Park/rainbow-is-all-you-need
 import numpy as np
 from typing import Dict
 

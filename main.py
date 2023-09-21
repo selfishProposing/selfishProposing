@@ -1,3 +1,5 @@
+#Code adapted from course "Modern Reinforcement Learning: Deep Q Agents (PyTorch & TF2)"
+#https://www.udemy.com/course/deep-q-learning-from-paper-to-code/
 import numpy as np
 from agent import Agent
 from environment_LC_PoS_perfect_randomness import LC_PoS_perfect_randomness
